@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -16,19 +17,14 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/', [NewsController::class, 'index']);
+
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/', function () {
-    return Inertia::render('Homepage', [
-        'title'  => 'Welcome to UpuyPortalWebsite',
-        'description' => 'Website yang akan menampilkan berita up to date'
     ]);
 });
 
