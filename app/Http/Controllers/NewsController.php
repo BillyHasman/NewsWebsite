@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\NewsCollection;
 use App\Models\News;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class NewsController extends Controller
      */
     public function index(Request $request)
     {
-        $news = News::all();
+        $news = new NewsCollection(News::OrderByDesc('id')->paginate(8));
         return Inertia::render('Homepage', [
             'title' => "Website Portal Berita",
             'description' => "welcome to news portal web",
@@ -34,7 +35,15 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Creating new news with user admin
+        $news = new News();
+        $news->title = $request->title;
+        $news->description = $request->description;
+        $news->category = $request->category;
+        $news->author = auth()->user()->email;
+        $news->save();
+        // Penggunaan notifikasi global 
+        return redirect()->back()->with('message', 'succeed creating news');
     }
 
     /**
@@ -42,15 +51,20 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        //
+        $myNews = $news::where('author', auth()->user()->email)->get();
+        return Inertia::render('Dashboard', [
+            'myNews' => $myNews,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(News $news)
+    public function edit(News $news, Request $request)
     {
-        //
+        return Inertia::render('EditNews', [
+            'myNews' => $news->find($request->id)
+        ]);
     }
 
     /**
@@ -58,14 +72,22 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        //
+        News::where('id', $request->id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'category' => $request->category,
+        ]);
+
+        return to_route('dashboard')->with('message', 'News Update Succeed');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(News $news)
+    public function destroy(Request $request)
     {
-        //
+        $news = News::find($request->id);
+        $news->delete();
+        return redirect()->back()->with('message', 'succeed deleting news');
     }
 }
