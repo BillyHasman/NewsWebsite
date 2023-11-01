@@ -28,13 +28,13 @@ export default function Dashboard(props) {
         if (!props.myNews) {
             router.get("/news");
         }
-        console.log("props: ", props);
+        // console.log("props: ", props);
         return;
     }, []);
 
     return (
         <AuthenticatedLayout
-            user={props.auth}
+            user={props.auth.user}
             errors={props.errors}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -44,10 +44,10 @@ export default function Dashboard(props) {
         >
             <Head title="Dashboard" />
 
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div className="py-10">
+                <div className="max-w-7xl mx-auto px-3 lg:px-8">
                     <div
-                        className="p-6 text-gray-900 dark:text-gray-100"
+                        className="p-6 text-gray-900 dark:text-gray-100 rounded-xl"
                         data-theme="light"
                     >
                         {isNotif && (
@@ -100,14 +100,16 @@ export default function Dashboard(props) {
                             Submit
                         </button>
                     </div>
-                    <div className="p-4">
+                </div>
+                <div className="lg:flex lg:justify-center">
+                    <div className="p-4 lg:grid lg:grid-flow-row-dense lg:grid-cols-3 lg:grid-rows-3 gap-x-10">
                         {props.myNews && props.myNews.length > 0 ? (
                             props.myNews.map((news, i) => {
                                 return (
                                     <div
                                         key={i}
                                         data-theme="light"
-                                        className="card w-full lg:w-96 bg-base-100 shadow-xl m-3"
+                                        className="card w-full lg:w-96 bg-base-100 shadow-xl my-4"
                                     >
                                         <div className="card-body">
                                             <h2 className="card-title">
@@ -145,8 +147,8 @@ export default function Dashboard(props) {
                                 );
                             })
                         ) : (
-                            <div className="flex justify-center">
-                                <div className="bg-warning p-5 text-center card w-full shadow-xl">
+                            <div className="justify-center col-span-2">
+                                <div className="bg-gray-200 p-5 text-center card w-full shadow-xl">
                                     <p className="text-black">News empty</p>
                                 </div>
                             </div>
