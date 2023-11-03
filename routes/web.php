@@ -19,6 +19,10 @@ use Inertia\Inertia;
 
 Route::get('/', [NewsController::class, 'index']);
 
+Route::get('/news-layout', function () {
+    return Inertia::render('NewsLayout');
+})->name('newslayout');
+
 // Dashboard Admin
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
