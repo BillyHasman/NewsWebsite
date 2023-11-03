@@ -20,9 +20,13 @@ export default {
     theme: {
         extend: {
             colors: {
+                primary: "#F81539",
+                secondary: "#FC4308",
+                black: "#3E3232",
+                dark: "#000000",
+                white: "#ffffff",
                 transparent: "transparent",
                 current: "currentColor",
-                white: "#ffffff",
                 purple: "#3f3cbb",
                 midnight: "#121063",
                 metal: "#565584",
@@ -33,7 +37,7 @@ export default {
             },
 
             fontFamily: {
-                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                sans: ["Roboto", ...defaultTheme.fontFamily.sans],
             },
         },
     },
