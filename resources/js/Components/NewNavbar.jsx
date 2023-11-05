@@ -1,3 +1,5 @@
+import { Link, Head, router } from "@inertiajs/react";
+
 export default function NewNavbar() {
     return (
         <div className="navbar bg-base-100">
@@ -43,7 +45,7 @@ export default function NewNavbar() {
                 </div>
             </div>
 
-            <div className="navbar-end">
+            <div className="navbar-end py-5">
                 <div className="flex gap-9">
                     <div className="form-control">
                         <input
