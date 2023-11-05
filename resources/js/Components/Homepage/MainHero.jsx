@@ -1,8 +1,8 @@
 import { Link, Head, router } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function TopTags() {
-    const tags = [
+export default function MainHero() {
+    const news = [
         {
             name: "#Food",
             imgUrl: "https://images2.alphacoders.com/100/1003810.jpg",
@@ -71,60 +71,38 @@ export default function TopTags() {
         },
     ];
 
-    const initialVisibleTags = 6;
-    const [visibleTags, setVisibleTags] = useState(initialVisibleTags);
-
-    const totalTags = tags.length;
-
-    const showNextTags = () => {
-        if (visibleTags < totalTags - 1) {
-            setVisibleTags(visibleTags + 1);
-        }
-    };
-
-    const showPrevTags = () => {
-        if (visibleTags > initialVisibleTags) {
-            setVisibleTags(visibleTags - 1);
-        }
-    };
-
     return (
-        <div className="flex overflow-x-auto p-3 gap-3 mx-3 bg-gray-200 rounded-lg">
-            {/* {visibleTags > initialVisibleTags && (
-                <button
-                    onClick={showPrevTags}
-                    className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
-                    Previous
-                </button>
-            )} */}
-            {tags.slice(1, visibleTags + 1).map((tag, index) => (
-                <div key={index} className="w-1/6">
-                    <Link href={tag.url}>
-                        <div
-                            className="h-16 rounded-2xl bg-cover bg-center"
-                            style={{
-                                backgroundImage: `url(${tag.imgUrl})`,
-                            }}
-                        >
-                            <div className="flex justify-center items-center h-full w-full">
-                                <p className="text-white font-bold text-2xl">
-                                    {tag.name}
-                                </p>
-                            </div>
-                        </div>
-                    </Link>
+        <div className="flex p-3 gap-3 h-screen rounded-lg">
+            <div className="flex items-end w-1/4 h-1/2 bg-slate-800 rounded-xl">
+                <div className="w-full h-1/4 bg-gray-300 m-3 rounded-xl py-5 px-5 overflow-clip">
+                    <h2 className="text-2xl mb-3">How to Drive a Car Safely</h2>
+                    <p className="">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Perspiciatis, sequi iusto! Nobis culpa tempora
+                        repudiandae. Eum officiis ducimus iste saepe.
+                    </p>
                 </div>
-            ))}
-
-            {/* {visibleTags < totalTags && (
-                <button
-                    onClick={showNextTags}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
-                    Next
-                </button>
-            )} */}
+            </div>
+            <div className="flex items-end  w-1/4 h-1/2 bg-slate-800 rounded-xl">
+                <div className="w-full h-1/4 bg-gray-300 m-3 rounded-xl py-5 px-5 overflow-clip">
+                    <h2 className="text-2xl mb-3">How to Drive a Car Safely</h2>
+                    <p className="">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Perspiciatis, sequi iusto! Nobis culpa tempora
+                        repudiandae. Eum officiis ducimus iste saepe.
+                    </p>
+                </div>
+            </div>
+            <div className="flex items-end  w-1/2 h-1/2 bg-slate-800 rounded-xl">
+                <div className="w-full h-1/4 bg-gray-300 m-3 rounded-xl py-5 px-5 overflow-clip">
+                    <h2 className="text-2xl mb-3">How to Drive a Car Safely</h2>
+                    <p className="">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Perspiciatis, sequi iusto! Nobis culpa tempora
+                        repudiandae. Eum officiis ducimus iste saepe.
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }
